@@ -26,9 +26,13 @@ The socket is not connected. Call `connect()` to open the connection using the g
 
 ## Properties
 
-### socket
+### acceptUndefinedProtocol
 
-Underlying native `WebSocket` object. May be `null`.
+If `true`, the server will be allowed not to select a sub-protocol.
+If `false`, the server will *not* be allowed not to select a sub-protocol.
+If such a case happens, the connection will be closed immediately and `onError` will be called.
+
+Default value is `true`.
 
 ### onReady
 
@@ -55,6 +59,10 @@ Callback called when socket receives data.
 Message data is passed as first argument.  
 Message event is passed as second argument. See https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent.
 
+### socket
+
+Underlying native `WebSocket` object. May be `null`.
+
 ### socketUrl
 
 URL of the server.
@@ -71,7 +79,7 @@ The value of this property is set by constructor and `connect()` when called wit
 
 When trying to connect to a server, the connection will be rejected if :
 - the server selects a sub-protocol that is not in this list or
-- the server does not select any protocol and this list is not empty.
+- the server does not select any protocol and the `acceptUndefinedProtocol` is set to `false`
 
 
 ## Methods
