@@ -24,6 +24,8 @@ function WebSocketHelper(pUrl, pProtocols) {
   this.onError   = null;
   this.onMessage = null;
 
+  this.acceptUndefinedProtocol = true;
+
   this.socketUrl       = pUrl       || null;
   this.socketProtocols = pProtocols ||   [];
 }
@@ -178,6 +180,6 @@ WebSocketHelper.prototype.isProtocolAcceptable = function(pProtocol) {
 
   return (
     this.socketProtocols.indexOf(pProtocol) != -1
-    || this.socketProtocols.length == 0 && pProtocol == ''
+    || pProtocol == '' && this.acceptUndefinedProtocol
   );
 }
